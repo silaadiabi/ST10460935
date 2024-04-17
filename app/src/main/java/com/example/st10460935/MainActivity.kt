@@ -21,13 +21,23 @@ class MainActivity : AppCompatActivity() {
         val add=findViewById<Button>(R.id.add)
 
         history.setOnClickListener{
-            val age=age.text.toString().toInt()
-            if(age>= 20 && age <= 100){
-                val findperson = personList.find { it.age==age }
 
-                result.text= "age for $findperson.name  is $findperson.age"
-            }else{
-                result.text="we don't have that person"
+
+
+            if(age.text.toString().toInt()>= 20 && age.text.toString().toInt() <= 100){
+
+                val findperson = personList.find { it.age==age.text.toString().toInt() }
+                if(!findperson.toString().isNullOrEmpty()){
+
+                  var results="you are ${age.text.toString()} years old,which is the same age as with ${name.text.toString()} ${name.text.toString()} was famous historical figure"
+                    result.text=results
+
+                }else{
+                    result.text="there is no historical figure known to be around 20 years old"
+
+                }
+
+
 
             }
 
@@ -38,13 +48,14 @@ class MainActivity : AppCompatActivity() {
             age.text.clear()
         }
         add.setOnClickListener{
-            val  name=name.text.toString()
-            val age=age.text.toString().toInt()
-            if(name.isNotEmpty() && age>=20 && age<=100){
-                val  person = Person(name,age)
+
+
+            if(name.text.toString().isNotEmpty() && age.text.toString().toInt()>=20 && age.text.toString().toInt()<=100){
+                val  person = Person(name.text.toString(),age.text.toString().toInt())
                 personList.add(person)
 
-                result.text="record $name,$age  added succefull"
+                 var res="record  for ${name.text.toString()}, age ${age.text.toString()}  added succefull"
+                result.text=res
             }else{
                 result.text="please enter valid name or age"
             }
